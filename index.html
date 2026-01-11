@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="resizeBtn">Change Grid Size</button>
+
+<div id="container"></div>
+
+<script>
+    const container = document.getElementById("container");
+const resizeBtn = document.getElementById("resizeBtn");
+
+function createGrid(size) {
+  container.innerHTML = ""; // clear old grid
+
+  const squareSize = 500 / size;
+
+  for (let i = 0; i < size * size; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+
+    square.style.width = `${squareSize}px`;
+    square.style.height = `${squareSize}px`;
+
+    // draw effect
+    square.addEventListener("mouseenter", () => {
+      square.style.backgroundColor = "white";
+    });
+
+    container.appendChild(square);
+  }
+}
+
+// default grid
+createGrid(16);
+
+// resize grid
+resizeBtn.addEventListener("click", () => {
+  let newSize = prompt("Enter grid size (max 100):");
+
+  if (newSize > 0 && newSize <= 100) {
+    createGrid(newSize);
+  } else {
+    alert("Please enter a number between 1 and 100");
+  }
+});
+
+</script>
+
+    
+</body>
+</html>
